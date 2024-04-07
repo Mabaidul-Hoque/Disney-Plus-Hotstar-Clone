@@ -14,13 +14,14 @@ import { Link, useLocation } from "react-router-dom";
 const Navbar = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const { pathname } = useLocation();
+  const [activeIndx, setActiveIndx] = useState(1);
 
   const handleSearch = () => {
     console.log("Searching for:", searchTerm);
   };
   return (
     <>
-      <div className="hidden md:flex items-center justify-between h-16 bg-black px-2 sm:px-20 md:px-4 lg:px-20 xl:px-24 py-4 ">
+      <div className="w-full hidden md:flex items-center justify-between h-16 bg-black px-2 sm:px-20 md:px-4 lg:px-20 xl:px-24 py-4 fixed top-0">
         {/* LEFT DISNEY LOGO */}
         <img
           width={50}
@@ -102,22 +103,65 @@ const Navbar = () => {
       </div>
 
       {/* MOBILE RESPONSIVE BOTTOM NAVABR */}
-      <div className="flex md:hidden items-center justify-between h-16 bg-black px-2 sm:px-20 md:px-4 lg:px-20 xl:px-24 py-4 absolute bottom-0 w-full">
+      <div className="md:hidden  h-16 bg-black px-2 sm:px-20 md:px-4 lg:px-20 xl:px-24 py-4 absolute bottom-0 w-full">
         <ul className="flex items-center justify-between">
-          <li>
-            <Link to={"/home"}>Home</Link>
+          {/* HOME */}
+          <li
+            className={`cursor-pointer  ${
+              activeIndx === 1 ? "text-green-600" : "hover:text-green-500"
+            }`}
+            onClick={() => setActiveIndx(1)}
+          >
+            <Link to={"/home"} className="flex flex-col ">
+              <FontAwesomeIcon icon={faHouse} />
+              <span>Home</span>
+            </Link>
           </li>
-          <li>
-            <Link to={"/search"}>Search</Link>
+          {/* SEARCH */}
+          <li
+            className={`cursor-pointer  ${
+              activeIndx === 2 ? "text-green-600" : "hover:text-green-500"
+            }`}
+            onClick={() => setActiveIndx(2)}
+          >
+            <Link to={"/search"} className="flex flex-col ">
+              <FontAwesomeIcon icon={faMagnifyingGlass} />
+              <span>Search</span>
+            </Link>
           </li>
-          <li>
-            <Link to={"/movie"}>Movie</Link>
+          {/* MOVIE */}
+          <li
+            className={`cursor-pointer  ${
+              activeIndx === 3 ? "text-green-600" : "hover:text-green-500"
+            }`}
+            onClick={() => setActiveIndx(3)}
+          >
+            <Link to={"/movie"} className="flex flex-col ">
+              <FontAwesomeIcon icon={faClapperboard} />
+              <span>Movie</span>
+            </Link>
           </li>
-          <li>
-            <Link to={"/tv"}>TV</Link>
+          <li
+            className={` cursor-pointer  ${
+              activeIndx === 4 ? "text-green-600" : "hover:text-green-500"
+            }`}
+            onClick={() => setActiveIndx(4)}
+          >
+            <Link to={"/tv"} className="flex flex-col">
+              <FontAwesomeIcon icon={faTv} />
+              <span>TV</span>
+            </Link>
           </li>
-          <li>
-            <Link to={"/mySpace"}>MySpace</Link>
+          <li
+            className={`cursor-pointer  ${
+              activeIndx === 5 ? "text-green-600" : "hover:text-green-500"
+            }`}
+            onClick={() => setActiveIndx(5)}
+          >
+            <Link to={"/mySpace"} className="flex flex-col ">
+              <FontAwesomeIcon icon={faCircleUser} />
+              <span>MySpace</span>
+            </Link>
           </li>
         </ul>
       </div>

@@ -21,7 +21,7 @@ const Navbar = () => {
   };
   return (
     <>
-      <div className="w-full hidden md:flex items-center justify-between h-16 bg-black px-2 sm:px-20 md:px-4 lg:px-20 xl:px-24 py-4 fixed top-0">
+      <div className="w-full hidden md:flex items-center justify-between h-16 bg-black px-2 sm:px-20 md:px-4 lg:px-20 xl:px-24 py-4 fixed top-0 bg-transparent">
         {/* LEFT DISNEY LOGO */}
         <img
           width={50}

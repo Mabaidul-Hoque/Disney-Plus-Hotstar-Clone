@@ -7,7 +7,7 @@ import { Navbar } from "./components/home-page";
 const Layout = () => {
   const { pathname } = useLocation();
   return (
-    <div>
+    <>
       {/* NAVBAR */}
       <nav>
         <Navbar />
@@ -18,7 +18,7 @@ const Layout = () => {
       </main>
       {/* FOOTER */}
       <footer></footer>
-    </div>
+    </>
   );
 };
 

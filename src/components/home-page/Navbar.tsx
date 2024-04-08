@@ -21,7 +21,7 @@ const Navbar = () => {
   };
   return (
     <>
-      <div className="w-full hidden md:flex items-center justify-between h-16 px-2 sm:px-20 md:px-4 lg:px-20 xl:px-24 py-4 fixed top-0 bg-transparent">
+      <nav className="w-full hidden md:flex items-center justify-between h-16 px-2 sm:px-20 md:px-4 lg:px-20 xl:px-24 py-4 fixed top-0 bg-transparent">
         {/* LEFT DISNEY LOGO */}
         <img
           width={50}
@@ -100,10 +100,10 @@ const Navbar = () => {
             <span className="text-xl">My Space</span>
           </Link>
         </div>
-      </div>
+      </nav>
 
       {/* MOBILE RESPONSIVE BOTTOM NAVABR */}
-      <div className="md:hidden  h-16 bg-black px-2 sm:px-20 md:px-4 lg:px-20 xl:px-24 py-4 absolute bottom-0 w-full bg-transparent">
+      <nav className="md:hidden  h-16 bg-black px-2 sm:px-20 md:px-4 lg:px-20 xl:px-24 py-4 absolute bottom-0 w-full bg-transparent">
         <ul className="flex items-center justify-between">
           {/* HOME */}
           <li
@@ -164,7 +164,7 @@ const Navbar = () => {
             </Link>
           </li>
         </ul>
-      </div>
+      </nav>
     </>
   );
 };

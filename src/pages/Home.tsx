@@ -2,11 +2,16 @@
 import { useEffect, useState } from "react";
 import { trendingMovies } from "../data/homeMovieDetails";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import {
+  faChevronLeft,
+  faChevronRight,
+  faPlus,
+} from "@fortawesome/free-solid-svg-icons";
 import { Tooltip } from "antd";
 import { fetchLatestNovies } from "../apis/movieApi";
 import { useNavigate } from "react-router-dom";
 import { Movies, useMovieData } from "../contexts/MovieProvider";
+import DisplayedMovies from "../components/ui/DisplayedMovies";
 
 const Home = () => {
   const [activeIndx, setActiveIndx] = useState(0);
@@ -15,6 +20,7 @@ const Home = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const navigate = useNavigate();
   const { latestMovies, setLatestMovies } = useMovieData();
+  const [moviePoster, setMoviePoster] = useState("");
 
   // console.log("filteredLM", filteredLM);
 
@@ -148,7 +154,7 @@ const Home = () => {
 
       {/* LATEST RELEASE SECTION */}
       <div
-        className="w-full py-4 pl-8"
+        className="w-full py-4 pl-8 border border-red-500 pb-20"
         onMouseEnter={() => setSlideShow(true)}
         onMouseLeave={() => setSlideShow(false)}
       >
@@ -163,32 +169,38 @@ const Home = () => {
             </button>
           )}
         </div>
-        <div className={`flex gap-4 overflow-x-auto scrollbar-hide relative`}>
+        <div className={`overflow-x-auto scrollbar-hide relative`}>
           {/* PREV NAVIGATION BTN  */}
           {slideShow && currentPage > 1 && (
             <div className="absolute left-0 top-0 bg-gray-900 text-white w-16 h-72 flex items-center justify-center bg-opacity-40">
-              <button onClick={onPrev}>Prev</button>
+              <button
+                onClick={onPrev}
+                className="hover:scale-110 hover:text-gray-200 active:text-green-500"
+              >
+                <FontAwesomeIcon className="size-8" icon={faChevronLeft} />
+              </button>
             </div>
           )}
 
-          {filteredLM &&
-            filteredLM.map((movie) => (
-              <li key={movie.id} className="flex-shrink-0 list-none">
-                <img
-                  src={
-                    movie.poster_path
-                      ? `https://image.tmdb.org/t/p/original/${movie.poster_path}`
-                      : `https://image.tmdb.org/t/p/original/${movie.backdrop_path}`
-                  }
-                  alt={movie.title}
-                  className="w-52 h-72 rounded-lg"
+          <div className="flex items-center gap-4 static z-10 ">
+            {filteredLM &&
+              filteredLM.map((movie) => (
+                <DisplayedMovies
+                  key={movie.id}
+                  setMoviePoster={setMoviePoster}
+                  movie={movie}
                 />
-              </li>
-            ))}
+              ))}
+          </div>
           {/* NEXT NAVIGATION BTN  */}
           {slideShow && currentPage < 4 && (
             <div className="absolute right-0 top-0 bg-gray-900 text-white w-16 h-72 flex items-center justify-center bg-opacity-40">
-              <button onClick={onNext}>Next</button>
+              <button
+                onClick={onNext}
+                className="hover:scale-110 hover:text-gray-200 active:text-green-500"
+              >
+                <FontAwesomeIcon className="size-8" icon={faChevronRight} />
+              </button>
             </div>
           )}
         </div>

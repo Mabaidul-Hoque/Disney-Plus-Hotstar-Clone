@@ -9,9 +9,9 @@ const Layout = () => {
   return (
     <>
       {/* NAVBAR */}
-      <nav className="">
-        <Navbar />
-      </nav>
+
+      <Navbar />
+
       {/* MAIN CONTENT */}
       <main className="">
         {pathname === "/" || pathname === "/home" ? <Home /> : <Outlet />}

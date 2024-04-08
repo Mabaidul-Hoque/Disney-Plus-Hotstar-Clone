@@ -2,22 +2,24 @@
 
 import { Outlet, useLocation } from "react-router-dom";
 import { Home } from "./pages";
-import { Navbar } from "./components/home-page";
+import { Footer, Navbar } from "./components/home-page";
 
 const Layout = () => {
   const { pathname } = useLocation();
   return (
     <>
       {/* NAVBAR */}
-      <nav>
+      <nav className="">
         <Navbar />
       </nav>
       {/* MAIN CONTENT */}
-      <main>
+      <main className="">
         {pathname === "/" || pathname === "/home" ? <Home /> : <Outlet />}
       </main>
       {/* FOOTER */}
-      <footer></footer>
+      <footer className="bg-gray-900 text-white p-6 mt-20">
+        <Footer />
+      </footer>
     </>
   );
 };

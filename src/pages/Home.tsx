@@ -5,24 +5,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { Tooltip } from "antd";
 import { fetchLatestNovies } from "../apis/movieApi";
-
-interface Movies {
-  id: number;
-  poster_path: string;
-  backdrop_path: string;
-  title: string;
-  overview: string;
-  release_date: string;
-  vote_average: string;
-  vote_count: string;
-}
+import { useNavigate } from "react-router-dom";
+import { Movies, useMovieData } from "../contexts/MovieProvider";
 
 const Home = () => {
   const [activeIndx, setActiveIndx] = useState(0);
-  const [latestMovies, setLatestMovies] = useState<Movies[]>([]);
   const [slideShow, setSlideShow] = useState(false);
   const [filteredLM, setFilteredLM] = useState<Movies[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const navigate = useNavigate();
+  const { latestMovies, setLatestMovies } = useMovieData();
 
   // console.log("filteredLM", filteredLM);
 
@@ -163,7 +155,10 @@ const Home = () => {
         <div className="flex items-center justify-between">
           <h1 className="text-4xl pb-4">Latest Releases</h1>
           {slideShow && (
-            <button className="pr-10 text-lg text-gray-200 hover:text-gray-400 font-semibold">
+            <button
+              onClick={() => navigate(`/home/latest-movie-list`)}
+              className="pr-10 text-lg text-gray-200 hover:text-gray-400 font-semibold"
+            >
               View All
             </button>
           )}

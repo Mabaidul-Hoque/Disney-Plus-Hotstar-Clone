@@ -35,3 +35,11 @@ nav {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+.text-custom-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4; /* Adjust this value based on how many lines you want to show */
+  -webkit-box-orient: vertical;
+}

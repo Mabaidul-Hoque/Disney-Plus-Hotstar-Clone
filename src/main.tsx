@@ -1,9 +1,10 @@
-import React from "react";
+// import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { Home, Movie, MySpace, Search, TV } from "./pages";
+import { Home, Movie, MovieListByCat, MySpace, Search, TV } from "./pages";
+import MovieProvider from "./contexts/MovieProvider.tsx";
 
 const router = createBrowserRouter([
   {
@@ -13,6 +14,10 @@ const router = createBrowserRouter([
       {
         path: "/home",
         element: <Home />,
+      },
+      {
+        path: "/home/:catID",
+        element: <MovieListByCat />,
       },
       {
         path: "/movie",
@@ -36,6 +41,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   // <React.StrictMode>
-  <RouterProvider router={router} />
+  <MovieProvider>
+    <RouterProvider router={router} />
+  </MovieProvider>
   // </React.StrictMode>
 );

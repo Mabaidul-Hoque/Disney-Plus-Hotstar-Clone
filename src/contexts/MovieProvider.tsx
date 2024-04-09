@@ -36,8 +36,14 @@ interface MovieProviderProps {
 
 const MovieProvider: React.FC<MovieProviderProps> = ({ children }) => {
   const [latestMovies, setLatestMovies] = useState<Movies[]>([]);
+  const [actionMovies, setActionMovies] = useState<Movies[]>([]);
 
-  const movieData = { latestMovies, setLatestMovies };
+  const movieData = {
+    latestMovies,
+    setLatestMovies,
+    actionMovies,
+    setActionMovies,
+  };
   return (
     <MovieContext.Provider value={movieData}>{children}</MovieContext.Provider>
   );

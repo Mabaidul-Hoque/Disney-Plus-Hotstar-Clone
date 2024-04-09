@@ -1,10 +1,6 @@
 import React, { useState } from "react";
-
 import { Movies } from "../../contexts/MovieProvider";
-import { Tooltip } from "antd";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlay, faPlus } from "@fortawesome/free-solid-svg-icons";
-import DisplayedMovies from "../ui/DisplayedMovies";
+import { DisplayedMovies } from "../ui";
 
 interface LatestMovieListProps {
   catTitle: string;
@@ -15,9 +11,6 @@ const LatestMovieList: React.FC<LatestMovieListProps> = ({
   movies,
 }) => {
   const [moviePoster, setMoviePoster] = useState("");
-  //   const [showContent, setShowContent] = useState(false);
-  //   const [activeID, setActiveID] = useState(0);
-  //   console.log("movies", movies);
 
   return (
     <div
@@ -38,11 +31,13 @@ const LatestMovieList: React.FC<LatestMovieListProps> = ({
       {/* ALL MOVIES */}
       <div className="flex items-center flex-wrap justify-between gap-6 py-10">
         {movies &&
-          movies.map((movie) => (
+          movies.map((movie, index) => (
             <DisplayedMovies
               key={movie.id}
               setMoviePoster={setMoviePoster}
               movie={movie}
+              index={index}
+              pathname="latest-movie-list"
             />
           ))}
       </div>

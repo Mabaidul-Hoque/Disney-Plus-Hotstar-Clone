@@ -7,13 +7,16 @@ import { Tooltip } from "antd";
 interface DisplayedMoviesProps {
   setMoviePoster: (value: string) => void;
   movie: Movies;
+  index: number;
+  pathname: string;
 }
 
 const DisplayedMovies: React.FC<DisplayedMoviesProps> = ({
   setMoviePoster,
   movie,
+  index,
+  pathname,
 }) => {
-  //   const [moviePoster, setMoviePoster] = useState("");
   const [showContent, setShowContent] = useState(false);
   const [activeID, setActiveID] = useState(0);
   return (
@@ -30,7 +33,13 @@ const DisplayedMovies: React.FC<DisplayedMoviesProps> = ({
         onMouseLeave={() => setShowContent(false)}
       >
         {showContent && activeID === movie.id ? (
-          <div className="scale-150 transition duration-300 ease-in-out flex flex-col items-start gap-1 bg-black rounded-lg pb-2">
+          <div
+            className={`${
+              pathname === "home" && index === 0 && "hover:translate-x-10"
+            } ${
+              pathname === "home" && index === 5 && "hover:-translate-x-20"
+            } hover:scale-125 transition-transform duration-1000  ease-in flex flex-col items-start gap-1 bg-black rounded-lg pb-2`}
+          >
             {/* IMGAE */}
             <img
               src={
@@ -39,14 +48,14 @@ const DisplayedMovies: React.FC<DisplayedMoviesProps> = ({
                   : `https://image.tmdb.org/t/p/original/${movie.backdrop_path}`
               }
               alt={movie.title}
-              className="w-full h-24 object-cover object-top rounded-t-lg"
+              className="w-full h-32 object-cover object-top rounded-t-lg"
             />
             {/* TITLE */}
-            <h1 className="px-2 text-2xl italic tracking-widest max-w-48 overflow-hidden text-ellipsis text-nowrap">
+            <h1 className="px-2 text-xl italic tracking-widest max-w-48 overflow-hidden text-ellipsis text-nowrap">
               {movie.title}
             </h1>
             {/* BTN TO WTACH */}
-            <div className="px-2 flex items-center gap-4 py-1">
+            <div className="px-2 flex items-center gap-4">
               <button
                 className="bg-gray-200 text-gray-800 px-8 py-1 rounded hover:bg-gray-400 hover:text-white hover:scale-105 transition duration-300 ease-in-out"
                 style={{ fontSize: 10, fontWeight: 500 }}
@@ -87,7 +96,7 @@ const DisplayedMovies: React.FC<DisplayedMoviesProps> = ({
                 : `https://image.tmdb.org/t/p/original/${movie.backdrop_path}`
             }
             alt={movie.title}
-            className="w-52 h-72 rounded-lg"
+            className="w-[12.8rem] h-72 rounded-lg"
           />
         )}
       </div>

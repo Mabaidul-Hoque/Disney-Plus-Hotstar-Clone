@@ -1,33 +1,33 @@
-import { useEffect, useState } from "react";
-import { Movies, useMovieData } from "../../../contexts/MovieProvider";
+import React, { useEffect, useState } from "react";
+import { Movies, useMovieData } from "../../contexts/MovieProvider";
 import { useNavigate } from "react-router-dom";
-import { fetchMovies } from "../../../apis/movieApi";
+import { fetchMovies } from "../../apis/movieApi";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChevronLeft,
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
-import { DisplayedMovies } from "../../ui";
+import { DisplayedMovies } from ".";
 
-const LatestMovie = () => {
+interface HomeMoviesProps {
+  movies: Movies[];
+  catTitle: string;
+  movieListRouteByCat: string;
+}
+
+const HomeMovies: React.FC<HomeMoviesProps> = ({
+  movies,
+  catTitle,
+  movieListRouteByCat,
+}) => {
   const [slideShow, setSlideShow] = useState(false);
-  const [filteredLM, setFilteredLM] = useState<Movies[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const navigate = useNavigate();
-  const { latestMovies, setLatestMovies } = useMovieData();
+  const [filteredLM, setFilteredLM] = useState<Movies[]>([]);
 
   useEffect(() => {
-    getLatestMovies();
+    setFilteredLM(movies.slice(0, 6));
   }, []);
-
-  const getLatestMovies = async () => {
-    const res = await fetchMovies(
-      "primary_release_date.gte=2024-01-01&primary_release_date.lte=2024-03-01"
-    );
-    // console.log("res from getLatestmovies", res);
-    setLatestMovies(res.results);
-    setFilteredLM(() => res.results.slice(0, 6));
-  };
 
   const onNext = () => {
     setCurrentPage((prev) => prev + 1);
@@ -42,7 +42,7 @@ const LatestMovie = () => {
     const lastIndx = currentPage * recordsPerPage;
     const firstIndx = lastIndx - recordsPerPage;
     console.log("currentpage", { currentPage, lastIndx, firstIndx });
-    setFilteredLM(() => latestMovies.slice(firstIndx, lastIndx));
+    setFilteredLM(() => movies.slice(firstIndx, lastIndx));
   }, [currentPage]);
 
   return (
@@ -52,10 +52,10 @@ const LatestMovie = () => {
       onMouseLeave={() => setSlideShow(false)}
     >
       <div className="flex items-center justify-between">
-        <h1 className="text-4xl pb-4">Latest Releases</h1>
+        <h1 className="text-4xl pb-4">{catTitle}</h1>
         {slideShow && (
           <button
-            onClick={() => navigate(`/home/latest-movie-list`)}
+            onClick={() => navigate(`/home/${movieListRouteByCat}`)}
             className="pr-10 text-lg text-gray-200 hover:text-gray-400 font-semibold"
           >
             View All
@@ -103,4 +103,4 @@ const LatestMovie = () => {
   );
 };
 
-export default LatestMovie;
+export default HomeMovies;

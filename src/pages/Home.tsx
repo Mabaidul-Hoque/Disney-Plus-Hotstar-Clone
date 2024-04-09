@@ -1,14 +1,45 @@
 // import React from 'react'
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { trendingMovies } from "../data/homeMovieDetails";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { Tooltip } from "antd";
-import { LatestMovie } from "../components/home-page/latest-movies";
 import { ActionMovie } from "../components/home-page/action-movie";
+import { fetchMovies } from "../apis/movieApi";
+import { Movies, useMovieData } from "../contexts/MovieProvider";
+import { HomeMovies } from "../components/ui";
 
 const Home = () => {
   const [activeIndx, setActiveIndx] = useState(0);
+  const {
+    latestMovies,
+    setLatestMovies,
+    setFilteredLM,
+    actionMovies,
+    setActionMovies,
+  } = useMovieData();
+  // const [filteredLM, setFilteredLM] = useState<Movies[]>([]);
+
+  useEffect(() => {
+    getLatestMovies(
+      "primary_release_date.gte=2024-01-01&primary_release_date.lte=2024-03-01"
+    );
+    getActionMovies("sort_by=popularity.desc&with_genres=28");
+  }, []);
+
+  const getLatestMovies = async (filterItems: string) => {
+    const res = await fetchMovies(filterItems);
+    console.log("res from getLatestmovies", res);
+    setLatestMovies(res.results);
+    // setFilteredLM(() => res.results.slice(0, 6));
+  };
+
+  const getActionMovies = async (filterItems: string) => {
+    const res = await fetchMovies(filterItems);
+    console.log("res from getActionMovies", res);
+    setActionMovies(res.results);
+    // setFilteredLM(() => res.results.slice(0, 6));
+  };
 
   return (
     <div className="w-full">
@@ -110,13 +141,21 @@ const Home = () => {
       </div>
 
       {/* LATEST RELEASE SECTION */}
-      <div>
-        <LatestMovie />
+      <div className="py-10">
+        <HomeMovies
+          movies={latestMovies}
+          catTitle="Latest Releases"
+          movieListRouteByCat="latest-movie-list"
+        />
       </div>
 
       {/* ACTION MOVIE SECTION */}
-      <div>
-        <ActionMovie />
+      <div className="py-10">
+        <HomeMovies
+          movies={actionMovies}
+          catTitle="Action Movies"
+          movieListRouteByCat="action-movie-list"
+        />
       </div>
     </div>
   );

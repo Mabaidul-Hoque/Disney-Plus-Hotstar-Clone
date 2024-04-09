@@ -1,1 +1,1 @@
-export { default as LatestMovie } from "./LatestMovie";
+// export { default as LatestMovie } from "../../ui/HomeMovies";

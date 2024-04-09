@@ -38,7 +38,7 @@ const DisplayedMovies: React.FC<DisplayedMoviesProps> = ({
               pathname === "home" && index === 0 && "hover:translate-x-10"
             } ${
               pathname === "home" && index === 5 && "hover:-translate-x-20"
-            } hover:scale-125 transition-transform duration-1000  ease-in flex flex-col items-start gap-1 bg-black rounded-lg pb-2`}
+            } hover:scale-125 transition-transform duration-500  ease-in flex flex-col items-start gap-1 bg-black rounded-lg pb-2`}
           >
             {/* IMGAE */}
             <img

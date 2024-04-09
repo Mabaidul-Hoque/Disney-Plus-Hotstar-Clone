@@ -4,14 +4,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { Tooltip } from "antd";
 
-interface DisplayedMoviesProps {
+interface ShowCardProps {
   setMoviePoster: (value: string) => void;
   movie: Movies;
   index: number;
   pathname: string;
 }
 
-const DisplayedMovies: React.FC<DisplayedMoviesProps> = ({
+const ShowCard: React.FC<ShowCardProps> = ({
   setMoviePoster,
   movie,
   index,
@@ -106,4 +106,4 @@ const DisplayedMovies: React.FC<DisplayedMoviesProps> = ({
   );
 };
 
-export default DisplayedMovies;
+export default ShowCard;

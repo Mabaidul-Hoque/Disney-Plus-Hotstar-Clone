@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { Home, Movie, MovieListByCat, MySpace, Search, TV } from "./pages";
+import { Home, Movie, MySpace, Search, ShowListByCat, TV } from "./pages";
 import MovieProvider from "./contexts/MovieProvider.tsx";
 
 const router = createBrowserRouter([
@@ -17,7 +17,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/home/:catID",
-        element: <MovieListByCat />,
+        element: <ShowListByCat />,
       },
       {
         path: "/movie",

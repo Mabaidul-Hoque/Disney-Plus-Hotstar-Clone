@@ -24,10 +24,16 @@ interface Lists {
   news: Movies[];
   kidsShows: Movies[];
 }
+export interface Genre {
+  id: string;
+  name: string;
+}
 
 interface MovieContextType {
   displayLists: Lists;
   setDisplayLists: React.Dispatch<React.SetStateAction<Lists>>;
+  movieGenres: Genre[];
+  setMovieGenres: React.Dispatch<React.SetStateAction<Genre[]>>;
 }
 
 const MovieContext = createContext<MovieContextType>({
@@ -42,6 +48,8 @@ const MovieContext = createContext<MovieContextType>({
     kidsShows: [],
   },
   setDisplayLists: () => {},
+  movieGenres: [],
+  setMovieGenres: () => {},
 });
 
 export const useMovieData = () => {
@@ -68,9 +76,13 @@ const MovieProvider: React.FC<MovieProviderProps> = ({ children }) => {
     kidsShows: [],
   });
 
+  const [movieGenres, setMovieGenres] = useState<Genre[]>([]);
+
   const movieData = {
     displayLists,
     setDisplayLists,
+    movieGenres,
+    setMovieGenres,
   };
   return (
     <MovieContext.Provider value={movieData}>{children}</MovieContext.Provider>

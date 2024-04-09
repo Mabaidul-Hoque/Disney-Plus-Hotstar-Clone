@@ -1,27 +1,48 @@
 // import React from "react";
 
 import { useParams } from "react-router-dom";
-import { useMovieData } from "../contexts/MovieProvider";
-import { MovieList } from "../components/ui";
+import { Movies, useMovieData } from "../contexts/MovieProvider";
+import { ListDisplayByCat } from "../components/ui";
+import { useEffect, useState } from "react";
+import { fetchMoviesByGenre } from "../apis/movieApi";
 
-const MovieListByCat = () => {
+const ShowListByCat = () => {
   const { catID } = useParams();
-  const { displayLists } = useMovieData();
+  const { displayLists, movieGenres } = useMovieData();
+  const [genre, seGenre] = useState({ id: "", name: "" });
+  const [movies, setMovies] = useState<Movies[]>([]);
 
-  //   console.log("catID-->", catID);
+  // console.log("catID-->", catID);
 
+  useEffect(() => {
+    for (let key in movieGenres) {
+      if (`${movieGenres[key].name}-movie-list` === catID) {
+        seGenre(movieGenres[key]);
+        break;
+      }
+    }
+
+    getMovieByGenre();
+  }, []);
+  console.log("genre", genre.name);
+  const getMovieByGenre = async () => {
+    const res = await fetchMoviesByGenre(genre.id, 1);
+    console.log("res from showlistby cat", res);
+
+    setMovies(res.results);
+  };
   return (
     <>
       {/* LATEST MOVIE LIST */}
       {catID === "latest-movie-list" && (
-        <MovieList
+        <ListDisplayByCat
           catTitle="Latest Movies"
           movies={displayLists.latestMovies}
         />
       )}
       {/* ACTION MOVIE LIST */}
       {catID === "action-movie-list" && (
-        <MovieList
+        <ListDisplayByCat
           catTitle="Action Movies"
           movies={displayLists.actionMovies}
         />
@@ -29,18 +50,18 @@ const MovieListByCat = () => {
 
       {/* KIDS TV SERIES SECTION */}
       {catID === "kids-tv-series-list" && (
-        <MovieList catTitle="Kids" movies={displayLists.kidsShows} />
+        <ListDisplayByCat catTitle="Kids" movies={displayLists.kidsShows} />
       )}
       {/* ROMANTIC MOVIE LIST */}
       {catID === "romantic-movie-list" && (
-        <MovieList
+        <ListDisplayByCat
           catTitle="Romantic Movies"
           movies={displayLists.romanticMovies}
         />
       )}
       {/* SCIENCE FICTION MOVIE LIST */}
       {catID === "sciFi-movie-list" && (
-        <MovieList
+        <ListDisplayByCat
           catTitle="Scinece Fiction Movies"
           movies={displayLists.sciFiMovies}
         />
@@ -48,7 +69,7 @@ const MovieListByCat = () => {
 
       {/* COMEDY TV SERIES SECTION */}
       {catID === "comedy-tv-series-list" && (
-        <MovieList
+        <ListDisplayByCat
           catTitle="Comedy TV Series"
           movies={displayLists.comedyTVSeries}
         />
@@ -56,7 +77,7 @@ const MovieListByCat = () => {
 
       {/* CRIME TV SERIES SECTION */}
       {catID === "crime-tv-series-list" && (
-        <MovieList
+        <ListDisplayByCat
           catTitle="Crime TV Series"
           movies={displayLists.crimeTVSeries}
         />
@@ -64,10 +85,15 @@ const MovieListByCat = () => {
 
       {/* NEWS TV SERIES SECTION */}
       {catID === "news-tv-series-list" && (
-        <MovieList catTitle="News" movies={displayLists.news} />
+        <ListDisplayByCat catTitle="News" movies={displayLists.news} />
+      )}
+
+      {/* MOVIES LIST SHOW BY CAT WHICH IS COMING THROUGH GENRE */}
+      {catID === `${genre.name}-movie-list` && (
+        <ListDisplayByCat catTitle={genre.name} movies={movies} />
       )}
     </>
   );
 };
 
-export default MovieListByCat;
+export default ShowListByCat;

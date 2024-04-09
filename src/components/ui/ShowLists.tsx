@@ -6,7 +6,7 @@ import {
   faChevronLeft,
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
-import { DisplayedMovies } from ".";
+import { ShowCard } from ".";
 
 interface HomeMoviesProps {
   movies: Movies[];
@@ -78,7 +78,7 @@ const HomeMovies: React.FC<HomeMoviesProps> = ({
         >
           {movies &&
             movies.map((movie, index) => (
-              <DisplayedMovies
+              <ShowCard
                 key={movie.id}
                 setMoviePoster={() => {}}
                 movie={movie}

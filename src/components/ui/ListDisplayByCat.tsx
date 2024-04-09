@@ -1,15 +1,12 @@
 import React, { useState } from "react";
 import { Movies } from "../../contexts/MovieProvider";
-import { DisplayedMovies } from ".";
+import { ShowCard } from ".";
 
-interface LatestMovieListProps {
+interface ShowListProps {
   catTitle: string;
   movies: Movies[];
 }
-const LatestMovieList: React.FC<LatestMovieListProps> = ({
-  catTitle,
-  movies,
-}) => {
+const ShowList: React.FC<ShowListProps> = ({ catTitle, movies }) => {
   const [moviePoster, setMoviePoster] = useState("");
 
   return (
@@ -32,7 +29,7 @@ const LatestMovieList: React.FC<LatestMovieListProps> = ({
       <div className="flex items-center flex-wrap justify-between gap-6 py-10">
         {movies &&
           movies.map((movie, index) => (
-            <DisplayedMovies
+            <ShowCard
               key={movie.id}
               setMoviePoster={setMoviePoster}
               movie={movie}
@@ -45,4 +42,4 @@ const LatestMovieList: React.FC<LatestMovieListProps> = ({
   );
 };
 
-export default LatestMovieList;
+export default ShowList;

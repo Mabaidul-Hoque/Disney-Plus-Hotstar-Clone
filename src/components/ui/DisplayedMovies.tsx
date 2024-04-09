@@ -45,12 +45,12 @@ const DisplayedMovies: React.FC<DisplayedMoviesProps> = ({
                   ? `https://image.tmdb.org/t/p/original/${movie.poster_path}`
                   : `https://image.tmdb.org/t/p/original/${movie.backdrop_path}`
               }
-              alt={movie.title}
+              alt={movie.title || movie.name}
               className="w-full h-32 object-cover object-top rounded-t-lg "
             />
             {/* TITLE */}
             <h1 className="px-2 text-xl italic tracking-widest max-w-48 overflow-hidden text-ellipsis text-nowrap">
-              {movie.title}
+              {movie.title || movie.name}
             </h1>
             {/* BTN TO WTACH */}
             <div className="px-2 flex items-center gap-4">
@@ -73,7 +73,11 @@ const DisplayedMovies: React.FC<DisplayedMoviesProps> = ({
             {/* RATING RELEASE YEAR CONTAINER */}
             <div className="max-w-48 flex items-center gap-2 px-2 text-sm">
               {/* RELEASE YEAR */}
-              <p>{movie.release_date.substring(0, 4)}</p>
+              <p>
+                {(movie.release_date && movie.release_date.substring(0, 4)) ||
+                  (movie.first_air_date &&
+                    movie.first_air_date.substring(0, 4))}
+              </p>
               <div className="w-1 h-1 bg-white rounded-full" />
               {/* IMDB RATINGS */}
               <p>{movie.vote_average} / 10</p>
@@ -93,8 +97,8 @@ const DisplayedMovies: React.FC<DisplayedMoviesProps> = ({
                 ? `https://image.tmdb.org/t/p/original/${movie.poster_path}`
                 : `https://image.tmdb.org/t/p/original/${movie.backdrop_path}`
             }
-            alt={movie.title}
-            className="w-48 xl:w-[12.8rem] h-64 xl:h-72 rounded-lg z-50"
+            alt={movie.title || movie.name}
+            className="w-48 xl:w-[12.8rem] h-64 xl:h-72 rounded-lg z-50 bg-black"
           />
         )}
       </div>

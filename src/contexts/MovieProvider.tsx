@@ -6,32 +6,42 @@ export interface Movies {
   backdrop_path: string;
   title: string;
   overview: string;
-  release_date: string;
+  release_date?: string;
   vote_average: string;
   vote_count: string;
   original_language: string;
+  first_air_date?: string;
+  name: string;
+}
+
+interface Lists {
+  latestMovies: Movies[];
+  actionMovies: Movies[];
+  romanticMovies: Movies[];
+  sciFiMovies: Movies[];
+  comedyTVSeries: Movies[];
+  crimeTVSeries: Movies[];
+  news: Movies[];
+  kidsShows: Movies[];
 }
 
 interface MovieContextType {
-  latestMovies: Movies[];
-  setLatestMovies: React.Dispatch<React.SetStateAction<Movies[]>>;
-  actionMovies: Movies[];
-  setActionMovies: React.Dispatch<React.SetStateAction<Movies[]>>;
-  romanticMovies: Movies[];
-  setRomanticMovies: React.Dispatch<React.SetStateAction<Movies[]>>;
-  pageRefresh: boolean;
-  setPageRefresh: React.Dispatch<React.SetStateAction<boolean>>;
+  displayLists: Lists;
+  setDisplayLists: React.Dispatch<React.SetStateAction<Lists>>;
 }
 
 const MovieContext = createContext<MovieContextType>({
-  latestMovies: [],
-  setLatestMovies: () => {},
-  actionMovies: [],
-  setActionMovies: () => {},
-  romanticMovies: [],
-  setRomanticMovies: () => {},
-  pageRefresh: false,
-  setPageRefresh: () => {},
+  displayLists: {
+    latestMovies: [],
+    actionMovies: [],
+    romanticMovies: [],
+    sciFiMovies: [],
+    comedyTVSeries: [],
+    crimeTVSeries: [],
+    news: [],
+    kidsShows: [],
+  },
+  setDisplayLists: () => {},
 });
 
 export const useMovieData = () => {
@@ -47,20 +57,20 @@ interface MovieProviderProps {
 }
 
 const MovieProvider: React.FC<MovieProviderProps> = ({ children }) => {
-  const [latestMovies, setLatestMovies] = useState<Movies[]>([]);
-  const [actionMovies, setActionMovies] = useState<Movies[]>([]);
-  const [romanticMovies, setRomanticMovies] = useState<Movies[]>([]);
-  const [pageRefresh, setPageRefresh] = useState(false);
+  const [displayLists, setDisplayLists] = useState<Lists>({
+    latestMovies: [],
+    actionMovies: [],
+    romanticMovies: [],
+    sciFiMovies: [],
+    comedyTVSeries: [],
+    crimeTVSeries: [],
+    news: [],
+    kidsShows: [],
+  });
 
   const movieData = {
-    latestMovies,
-    setLatestMovies,
-    actionMovies,
-    setActionMovies,
-    romanticMovies,
-    setRomanticMovies,
-    pageRefresh,
-    setPageRefresh,
+    displayLists,
+    setDisplayLists,
   };
   return (
     <MovieContext.Provider value={movieData}>{children}</MovieContext.Provider>

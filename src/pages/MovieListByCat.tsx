@@ -1,12 +1,12 @@
 // import React from "react";
 
 import { useParams } from "react-router-dom";
-import { LatestMovieList } from "../components/Movie-list-by-category";
 import { useMovieData } from "../contexts/MovieProvider";
+import { MovieList } from "../components/ui";
 
 const MovieListByCat = () => {
   const { catID } = useParams();
-  const { latestMovies, actionMovies } = useMovieData();
+  const { latestMovies, actionMovies, romanticMovies } = useMovieData();
 
   //   console.log("catID-->", catID);
 
@@ -14,11 +14,15 @@ const MovieListByCat = () => {
     <>
       {/* LATEST MOVIE LIST */}
       {catID === "latest-movie-list" && (
-        <LatestMovieList catTitle="Latest Movies" movies={latestMovies} />
+        <MovieList catTitle="Latest Movies" movies={latestMovies} />
       )}
       {/* ACTION MOVIE LIST */}
       {catID === "action-movie-list" && (
-        <LatestMovieList catTitle="Action Movies" movies={actionMovies} />
+        <MovieList catTitle="Action Movies" movies={actionMovies} />
+      )}
+      {/* ROMANTIC MOVIE LIST */}
+      {catID === "romantic-movie-list" && (
+        <MovieList catTitle="Romantic Movies" movies={romanticMovies} />
       )}
     </>
   );

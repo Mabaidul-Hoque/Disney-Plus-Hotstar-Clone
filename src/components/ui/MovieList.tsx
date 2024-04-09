@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Movies } from "../../contexts/MovieProvider";
-import { DisplayedMovies } from "../ui";
+import { DisplayedMovies } from ".";
 
 interface LatestMovieListProps {
   catTitle: string;

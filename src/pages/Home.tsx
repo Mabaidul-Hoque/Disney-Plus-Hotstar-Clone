@@ -14,31 +14,34 @@ const Home = () => {
   const {
     latestMovies,
     setLatestMovies,
-    setFilteredLM,
     actionMovies,
     setActionMovies,
+    romanticMovies,
+    setRomanticMovies,
   } = useMovieData();
-  // const [filteredLM, setFilteredLM] = useState<Movies[]>([]);
 
   useEffect(() => {
     getLatestMovies(
       "primary_release_date.gte=2024-01-01&primary_release_date.lte=2024-03-01"
     );
     getActionMovies("sort_by=popularity.desc&with_genres=28");
+    getRomanticMovies("sort_by=popularity.desc&with_genres=10749");
   }, []);
 
   const getLatestMovies = async (filterItems: string) => {
     const res = await fetchMovies(filterItems);
-    console.log("res from getLatestmovies", res);
     setLatestMovies(res.results);
-    // setFilteredLM(() => res.results.slice(0, 6));
   };
 
   const getActionMovies = async (filterItems: string) => {
     const res = await fetchMovies(filterItems);
-    console.log("res from getActionMovies", res);
     setActionMovies(res.results);
-    // setFilteredLM(() => res.results.slice(0, 6));
+  };
+
+  const getRomanticMovies = async (filterItems: string) => {
+    const res = await fetchMovies(filterItems);
+    console.log("res from getActionMovies", res);
+    setRomanticMovies(res.results);
   };
 
   return (
@@ -155,6 +158,15 @@ const Home = () => {
           movies={actionMovies}
           catTitle="Action Movies"
           movieListRouteByCat="action-movie-list"
+        />
+      </div>
+
+      {/* ROMANTIC MOVIE SECTION */}
+      <div className="py-10">
+        <HomeMovies
+          movies={romanticMovies}
+          catTitle="Romantic Movies"
+          movieListRouteByCat="romantic-movie-list"
         />
       </div>
     </div>

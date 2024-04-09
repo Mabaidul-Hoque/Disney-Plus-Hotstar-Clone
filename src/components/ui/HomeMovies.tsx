@@ -27,7 +27,7 @@ const HomeMovies: React.FC<HomeMoviesProps> = ({
 
   useEffect(() => {
     setFilteredLM(movies.slice(0, 6));
-  }, []);
+  }, [currentPage, slideShow]);
 
   const onNext = () => {
     setCurrentPage((prev) => prev + 1);

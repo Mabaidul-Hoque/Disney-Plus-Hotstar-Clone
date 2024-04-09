@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { Movies, useMovieData } from "../../contexts/MovieProvider";
+import React, { useRef, useState } from "react";
+import { Movies } from "../../contexts/MovieProvider";
 import { useNavigate } from "react-router-dom";
-import { fetchMovies } from "../../apis/movieApi";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChevronLeft,
@@ -15,35 +14,27 @@ interface HomeMoviesProps {
   movieListRouteByCat: string;
 }
 
+const screenWidth = window.innerWidth;
+
 const HomeMovies: React.FC<HomeMoviesProps> = ({
   movies,
   catTitle,
   movieListRouteByCat,
 }) => {
   const [slideShow, setSlideShow] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
   const navigate = useNavigate();
-  const [filteredLM, setFilteredLM] = useState<Movies[]>([]);
+  const elementRef = useRef(null);
 
-  useEffect(() => {
-    setFilteredLM(movies.slice(0, 6));
-  }, [currentPage, slideShow]);
+  const sliderRight = (element: HTMLElement) => {
+    console.log("screenWidth", screenWidth);
 
-  const onNext = () => {
-    setCurrentPage((prev) => prev + 1);
+    element.scrollLeft += screenWidth - 110;
   };
+  const sliderLeft = (element: HTMLElement) => {
+    console.log("screenWidth", screenWidth);
 
-  const onPrev = () => {
-    setCurrentPage((prev) => prev - 1);
+    element.scrollLeft -= screenWidth - 110;
   };
-
-  useEffect(() => {
-    const recordsPerPage = 6;
-    const lastIndx = currentPage * recordsPerPage;
-    const firstIndx = lastIndx - recordsPerPage;
-    console.log("currentpage", { currentPage, lastIndx, firstIndx });
-    setFilteredLM(() => movies.slice(firstIndx, lastIndx));
-  }, [currentPage]);
 
   return (
     <div
@@ -62,22 +53,31 @@ const HomeMovies: React.FC<HomeMoviesProps> = ({
           </button>
         )}
       </div>
-      <div className={` relative`}>
+      {/* MOVIES DISPLAY */}
+      <div className={`relative z-10`}>
         {/* PREV NAVIGATION BTN  */}
-        {slideShow && currentPage > 1 && (
-          <div className="absolute left-0 top-0 bg-gray-900 text-white w-16 h-72 flex items-center justify-center bg-opacity-40">
+        {slideShow && (
+          <div className="absolute left-0 top-0 bg-gray-900 text-white w-8 lg:w-16 h-64 xl:h-72 flex items-center justify-center bg-opacity-40">
             <button
-              onClick={onPrev}
+              onClick={() =>
+                elementRef.current && sliderLeft(elementRef.current)
+              }
               className="hover:scale-110 hover:text-gray-200 active:text-green-500"
             >
-              <FontAwesomeIcon className="size-8" icon={faChevronLeft} />
+              <FontAwesomeIcon
+                className="size-6 lg:size-8"
+                icon={faChevronLeft}
+              />
             </button>
           </div>
         )}
 
-        <div className="flex items-center gap-4 ">
-          {filteredLM &&
-            filteredLM.map((movie, index) => (
+        <div
+          className="flex items-center gap-2 xl:gap-4 overflow-x-auto scrollbar-hide scroll-smooth"
+          ref={elementRef}
+        >
+          {movies &&
+            movies.map((movie, index) => (
               <DisplayedMovies
                 key={movie.id}
                 setMoviePoster={() => {}}
@@ -88,13 +88,18 @@ const HomeMovies: React.FC<HomeMoviesProps> = ({
             ))}
         </div>
         {/* NEXT NAVIGATION BTN  */}
-        {slideShow && currentPage < 4 && (
-          <div className="absolute right-0 top-0 bg-gray-900 text-white w-16 h-72 flex items-center justify-center bg-opacity-40">
+        {slideShow && (
+          <div className="absolute right-0 top-0 bg-gray-900 text-white w-8 lg:w-16 h-64 xl:h-72 flex items-center justify-center bg-opacity-40">
             <button
-              onClick={onNext}
+              onClick={() =>
+                elementRef.current && sliderRight(elementRef.current)
+              }
               className="hover:scale-110 hover:text-gray-200 active:text-green-500"
             >
-              <FontAwesomeIcon className="size-8" icon={faChevronRight} />
+              <FontAwesomeIcon
+                className="size-6 lg:size-8"
+                icon={faChevronRight}
+              />
             </button>
           </div>
         )}

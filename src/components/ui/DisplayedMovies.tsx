@@ -22,7 +22,7 @@ const DisplayedMovies: React.FC<DisplayedMoviesProps> = ({
   return (
     <>
       <div
-        className="flex-shrink-0 list-none cursor-pointer hover:scale-110 transition duration-300 ease-in-out static z-100"
+        className="flex-shrink-0 cursor-pointer "
         onMouseEnter={() => {
           setActiveID(movie.id);
           setMoviePoster(
@@ -36,9 +36,7 @@ const DisplayedMovies: React.FC<DisplayedMoviesProps> = ({
           <div
             className={`${
               pathname === "home" && index === 0 && "hover:translate-x-10"
-            } ${
-              pathname === "home" && index === 5 && "hover:-translate-x-20"
-            } hover:scale-125 transition-transform duration-500  ease-in flex flex-col items-start gap-1 bg-black rounded-lg pb-2`}
+            } h-64 xl:h-72 hover:scale-125 transition-transform duration-500  ease-in-out flex flex-col items-start gap-1 bg-black rounded-lg pb-2`}
           >
             {/* IMGAE */}
             <img
@@ -48,7 +46,7 @@ const DisplayedMovies: React.FC<DisplayedMoviesProps> = ({
                   : `https://image.tmdb.org/t/p/original/${movie.backdrop_path}`
               }
               alt={movie.title}
-              className="w-full h-32 object-cover object-top rounded-t-lg"
+              className="w-full h-32 object-cover object-top rounded-t-lg "
             />
             {/* TITLE */}
             <h1 className="px-2 text-xl italic tracking-widest max-w-48 overflow-hidden text-ellipsis text-nowrap">
@@ -96,7 +94,7 @@ const DisplayedMovies: React.FC<DisplayedMoviesProps> = ({
                 : `https://image.tmdb.org/t/p/original/${movie.backdrop_path}`
             }
             alt={movie.title}
-            className="w-[12.8rem] h-72 rounded-lg"
+            className="w-48 xl:w-[12.8rem] h-64 xl:h-72 rounded-lg z-50"
           />
         )}
       </div>

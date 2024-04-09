@@ -4,9 +4,8 @@ import { trendingMovies } from "../data/homeMovieDetails";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { Tooltip } from "antd";
-import { ActionMovie } from "../components/home-page/action-movie";
 import { fetchMovies } from "../apis/movieApi";
-import { Movies, useMovieData } from "../contexts/MovieProvider";
+import { useMovieData } from "../contexts/MovieProvider";
 import { HomeMovies } from "../components/ui";
 
 const Home = () => {
@@ -43,6 +42,8 @@ const Home = () => {
     console.log("res from getActionMovies", res);
     setRomanticMovies(res.results);
   };
+
+  console.log("latestMovies", latestMovies);
 
   return (
     <div className="w-full">
@@ -144,7 +145,7 @@ const Home = () => {
       </div>
 
       {/* LATEST RELEASE SECTION */}
-      <div className="py-10">
+      <div className="py-10 pl-2">
         <HomeMovies
           movies={latestMovies}
           catTitle="Latest Releases"

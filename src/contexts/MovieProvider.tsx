@@ -19,6 +19,8 @@ interface MovieContextType {
   setActionMovies: React.Dispatch<React.SetStateAction<Movies[]>>;
   romanticMovies: Movies[];
   setRomanticMovies: React.Dispatch<React.SetStateAction<Movies[]>>;
+  pageRefresh: boolean;
+  setPageRefresh: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const MovieContext = createContext<MovieContextType>({
@@ -28,6 +30,8 @@ const MovieContext = createContext<MovieContextType>({
   setActionMovies: () => {},
   romanticMovies: [],
   setRomanticMovies: () => {},
+  pageRefresh: false,
+  setPageRefresh: () => {},
 });
 
 export const useMovieData = () => {
@@ -46,6 +50,7 @@ const MovieProvider: React.FC<MovieProviderProps> = ({ children }) => {
   const [latestMovies, setLatestMovies] = useState<Movies[]>([]);
   const [actionMovies, setActionMovies] = useState<Movies[]>([]);
   const [romanticMovies, setRomanticMovies] = useState<Movies[]>([]);
+  const [pageRefresh, setPageRefresh] = useState(false);
 
   const movieData = {
     latestMovies,
@@ -54,6 +59,8 @@ const MovieProvider: React.FC<MovieProviderProps> = ({ children }) => {
     setActionMovies,
     romanticMovies,
     setRomanticMovies,
+    pageRefresh,
+    setPageRefresh,
   };
   return (
     <MovieContext.Provider value={movieData}>{children}</MovieContext.Provider>

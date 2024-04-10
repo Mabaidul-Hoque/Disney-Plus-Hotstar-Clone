@@ -6,3 +6,4 @@ export { default as Search } from "./Search";
 export { default as HomeShowListByCat } from "./HomeShowListByCat";
 export { default as MovieShowListByCat } from "./MovieShowListByCat";
 export { default as TVShowListByCat } from "./TVShowListByCat";
+export { default as HomeShowDetails } from "./HomeShowDetails";

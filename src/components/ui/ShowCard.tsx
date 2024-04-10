@@ -3,7 +3,7 @@ import { Movies } from "../../contexts/MovieProvider";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { Tooltip } from "antd";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 interface ShowCardProps {
   setMoviePoster: (value: string) => void;
@@ -19,6 +19,7 @@ const ShowCard: React.FC<ShowCardProps> = ({
   const [showContent, setShowContent] = useState(false);
   const [activeID, setActiveID] = useState(0);
   const { pathname } = useLocation();
+  const navigate = useNavigate();
 
   return (
     <>
@@ -97,6 +98,7 @@ const ShowCard: React.FC<ShowCardProps> = ({
           </div>
         ) : (
           <img
+            onClick={() => navigate(`${pathname}/show-details/${movie.id}`)}
             src={
               movie.poster_path
                 ? `https://image.tmdb.org/t/p/original/${movie.poster_path}`

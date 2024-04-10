@@ -5,6 +5,7 @@ import "./index.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import {
   Home,
+  HomeShowDetails,
   HomeShowListByCat,
   Movie,
   MovieShowListByCat,
@@ -14,6 +15,8 @@ import {
   TVShowListByCat,
 } from "./pages";
 import MovieProvider from "./contexts/MovieProvider.tsx";
+import TVShowDetails from "./pages/TVShowDetails.tsx";
+import MovieShowDetails from "./pages/MovieShowDetails.tsx";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +32,10 @@ const router = createBrowserRouter([
         element: <HomeShowListByCat />,
       },
       {
+        path: "/home/show-details/:showID",
+        element: <HomeShowDetails />,
+      },
+      {
         path: "/movie",
         element: <Movie />,
       },
@@ -37,12 +44,20 @@ const router = createBrowserRouter([
         element: <MovieShowListByCat />,
       },
       {
+        path: "/movie/show-details/:showID",
+        element: <MovieShowDetails />,
+      },
+      {
         path: "/tv",
         element: <TV />,
       },
       {
         path: "/tv/:catID",
         element: <TVShowListByCat />,
+      },
+      {
+        path: "/tv/show-details/:showID",
+        element: <TVShowDetails />,
       },
       {
         path: "/mySpace",

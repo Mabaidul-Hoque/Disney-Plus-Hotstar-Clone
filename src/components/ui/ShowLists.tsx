@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { Movies } from "../../contexts/MovieProvider";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChevronLeft,
@@ -24,6 +24,7 @@ const HomeMovies: React.FC<HomeMoviesProps> = ({
   const [slideShow, setSlideShow] = useState(false);
   const navigate = useNavigate();
   const elementRef = useRef(null);
+  const { pathname } = useLocation();
 
   const sliderRight = (element: HTMLElement) => {
     console.log("screenWidth", screenWidth);
@@ -46,7 +47,7 @@ const HomeMovies: React.FC<HomeMoviesProps> = ({
         <h1 className="text-4xl pb-4">{catTitle}</h1>
         {slideShow && (
           <button
-            onClick={() => navigate(`/home/${movieListRouteByCat}`)}
+            onClick={() => navigate(`${pathname}/${movieListRouteByCat}`)}
             className="pr-10 text-lg text-gray-200 hover:text-gray-400 font-semibold"
           >
             View All

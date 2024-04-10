@@ -8,25 +8,27 @@ import { MovieList } from "../components/movies";
 import { useMovieData } from "../contexts/MovieProvider";
 
 const Movie = () => {
-  // const [movieGenres, setMovieGenres] = useState<Genre[]>([]);
-  const { movieGenres, setMovieGenres } = useMovieData();
+  const { genres, setGenres } = useMovieData();
 
   useEffect(() => {
     getMovieGenres();
   }, []);
   const getMovieGenres = async () => {
     const res = await fetchMovieGenres();
-    console.log("res from movieGnere", res);
-    setMovieGenres(res.genres);
+    // console.log("res from movieGnere", res);
+    setGenres((prev) => ({
+      ...prev,
+      movieGenres: res.genres,
+    }));
   };
   return (
     <div className="">
-      {/* HOME HEADER */}
+      {/* MOVIE HEADER */}
       <TopTrendingShows shows={trendingMovies} />
 
       {/* DISPLAY MOVIES BY GENRE */}
       <div>
-        {movieGenres.map((genre) => (
+        {genres.movieGenres.map((genre) => (
           <MovieList key={genre.id} genre={genre} />
         ))}
       </div>

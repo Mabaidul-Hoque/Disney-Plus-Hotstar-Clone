@@ -3,7 +3,16 @@ import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { Home, Movie, MySpace, Search, ShowListByCat, TV } from "./pages";
+import {
+  Home,
+  HomeShowListByCat,
+  Movie,
+  MovieShowListByCat,
+  MySpace,
+  Search,
+  TV,
+  TVShowListByCat,
+} from "./pages";
 import MovieProvider from "./contexts/MovieProvider.tsx";
 
 const router = createBrowserRouter([
@@ -17,15 +26,23 @@ const router = createBrowserRouter([
       },
       {
         path: "/home/:catID",
-        element: <ShowListByCat />,
+        element: <HomeShowListByCat />,
       },
       {
         path: "/movie",
         element: <Movie />,
       },
       {
+        path: "/movie/:catID",
+        element: <MovieShowListByCat />,
+      },
+      {
         path: "/tv",
         element: <TV />,
+      },
+      {
+        path: "/tv/:catID",
+        element: <TVShowListByCat />,
       },
       {
         path: "/mySpace",

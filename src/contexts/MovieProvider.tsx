@@ -29,11 +29,16 @@ export interface Genre {
   name: string;
 }
 
+export interface Genres {
+  movieGenres: Genre[];
+  tvGenres: Genre[];
+}
+
 interface MovieContextType {
   displayLists: Lists;
   setDisplayLists: React.Dispatch<React.SetStateAction<Lists>>;
-  movieGenres: Genre[];
-  setMovieGenres: React.Dispatch<React.SetStateAction<Genre[]>>;
+  genres: Genres;
+  setGenres: React.Dispatch<React.SetStateAction<Genres>>;
 }
 
 const MovieContext = createContext<MovieContextType>({
@@ -48,8 +53,11 @@ const MovieContext = createContext<MovieContextType>({
     kidsShows: [],
   },
   setDisplayLists: () => {},
-  movieGenres: [],
-  setMovieGenres: () => {},
+  genres: {
+    movieGenres: [],
+    tvGenres: [],
+  },
+  setGenres: () => {},
 });
 
 export const useMovieData = () => {
@@ -76,13 +84,16 @@ const MovieProvider: React.FC<MovieProviderProps> = ({ children }) => {
     kidsShows: [],
   });
 
-  const [movieGenres, setMovieGenres] = useState<Genre[]>([]);
+  const [genres, setGenres] = useState<Genres>({
+    movieGenres: [],
+    tvGenres: [],
+  });
 
   const movieData = {
     displayLists,
     setDisplayLists,
-    movieGenres,
-    setMovieGenres,
+    genres,
+    setGenres,
   };
   return (
     <MovieContext.Provider value={movieData}>{children}</MovieContext.Provider>

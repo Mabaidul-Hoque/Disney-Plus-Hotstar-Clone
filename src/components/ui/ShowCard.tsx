@@ -9,19 +9,16 @@ interface ShowCardProps {
   setMoviePoster: (value: string) => void;
   movie: Movies;
   index: number;
-  // pathname: string;
 }
 
 const ShowCard: React.FC<ShowCardProps> = ({
   setMoviePoster,
   movie,
   index,
-  // pathname,
 }) => {
   const [showContent, setShowContent] = useState(false);
   const [activeID, setActiveID] = useState(0);
   const { pathname } = useLocation();
-  console.log("pathname", typeof pathname);
 
   return (
     <>

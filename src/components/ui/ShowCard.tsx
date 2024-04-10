@@ -3,22 +3,26 @@ import { Movies } from "../../contexts/MovieProvider";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { Tooltip } from "antd";
+import { useLocation } from "react-router-dom";
 
 interface ShowCardProps {
   setMoviePoster: (value: string) => void;
   movie: Movies;
   index: number;
-  pathname: string;
+  // pathname: string;
 }
 
 const ShowCard: React.FC<ShowCardProps> = ({
   setMoviePoster,
   movie,
   index,
-  pathname,
+  // pathname,
 }) => {
   const [showContent, setShowContent] = useState(false);
   const [activeID, setActiveID] = useState(0);
+  const { pathname } = useLocation();
+  console.log("pathname", typeof pathname);
+
   return (
     <>
       <div
@@ -32,11 +36,15 @@ const ShowCard: React.FC<ShowCardProps> = ({
         }}
         onMouseLeave={() => setShowContent(false)}
       >
-        {showContent && activeID === movie.id ? (
+        {showContent &&
+        activeID === movie.id &&
+        pathname !== "/movie" &&
+        pathname !== "/home" &&
+        pathname !== "/tv" ? (
           <div
             className={`${
               pathname === "home" && index === 0 && "hover:translate-x-10"
-            } h-64 xl:h-72 hover:scale-125 transition-transform duration-500  ease-in-out flex flex-col items-start gap-1 bg-black rounded-lg pb-2`}
+            } h-72 hover:scale-125 transition-transform duration-500  ease-in-out flex flex-col items-start gap-1 bg-black rounded-lg pb-2`}
           >
             {/* IMGAE */}
             <img
@@ -98,7 +106,7 @@ const ShowCard: React.FC<ShowCardProps> = ({
                 : `https://image.tmdb.org/t/p/original/${movie.backdrop_path}`
             }
             alt={movie.title || movie.name}
-            className="w-48 xl:w-[12.8rem] h-64 xl:h-72 rounded-lg z-50 bg-black"
+            className="w-48 xl:w-[12.8rem] h-72 rounded-lg z-50 bg-black hover:scale-105 hover:border hover:border-white transition-transform duration-300 ease-in-out"
           />
         )}
       </div>

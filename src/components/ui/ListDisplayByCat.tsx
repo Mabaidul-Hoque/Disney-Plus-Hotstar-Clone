@@ -26,7 +26,7 @@ const ShowList: React.FC<ShowListProps> = ({ catTitle, movies }) => {
       </h1>
 
       {/* ALL MOVIES */}
-      <div className="flex items-center flex-wrap justify-between gap-6 py-10">
+      <div className="flex items-center flex-wrap justify-center lg:justify-between gap-6 py-10">
         {movies &&
           movies.map((movie, index) => (
             <ShowCard
@@ -34,7 +34,6 @@ const ShowList: React.FC<ShowListProps> = ({ catTitle, movies }) => {
               setMoviePoster={setMoviePoster}
               movie={movie}
               index={index}
-              pathname="latest-movie-list"
             />
           ))}
       </div>

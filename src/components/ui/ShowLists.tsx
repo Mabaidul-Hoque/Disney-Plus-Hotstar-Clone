@@ -57,7 +57,7 @@ const HomeMovies: React.FC<HomeMoviesProps> = ({
       <div className={`relative z-10`}>
         {/* PREV NAVIGATION BTN  */}
         {slideShow && (
-          <div className="absolute left-0 top-0 bg-gray-900 text-white w-8 lg:w-16 h-64 xl:h-72 flex items-center justify-center bg-opacity-40">
+          <div className="absolute left-0 top-0 bg-gray-900 text-white w-8 lg:w-16 h-72 flex items-center justify-center bg-opacity-40">
             <button
               onClick={() =>
                 elementRef.current && sliderLeft(elementRef.current)
@@ -73,7 +73,7 @@ const HomeMovies: React.FC<HomeMoviesProps> = ({
         )}
 
         <div
-          className="flex items-center gap-2 xl:gap-4 overflow-x-auto scrollbar-hide scroll-smooth"
+          className="flex items-center gap-2 xl:gap-4 overflow-x-auto overflow-y-hidden scrollbar-hide scroll-smooth"
           ref={elementRef}
         >
           {movies &&
@@ -83,13 +83,12 @@ const HomeMovies: React.FC<HomeMoviesProps> = ({
                 setMoviePoster={() => {}}
                 movie={movie}
                 index={index}
-                pathname="home"
               />
             ))}
         </div>
         {/* NEXT NAVIGATION BTN  */}
         {slideShow && (
-          <div className="absolute right-0 top-0 bg-gray-900 text-white w-8 lg:w-16 h-64 xl:h-72 flex items-center justify-center bg-opacity-40">
+          <div className="absolute right-0 top-0 bg-gray-900 text-white w-8 lg:w-16 h-72 flex items-center justify-center bg-opacity-40">
             <button
               onClick={() =>
                 elementRef.current && sliderRight(elementRef.current)

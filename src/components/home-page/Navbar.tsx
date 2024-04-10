@@ -103,7 +103,7 @@ const Navbar = () => {
       </nav>
 
       {/* MOBILE RESPONSIVE BOTTOM NAVABR */}
-      <nav className="md:hidden  h-16 bg-black px-2 sm:px-20 md:px-4 lg:px-20 xl:px-24 py-4 fixed bottom-0 w-full bg-transparent">
+      <nav className="md:hidden  h-16 bg-black px-2 sm:px-20 md:px-4 lg:px-20 xl:px-24 py-4 fixed bottom-0 w-full">
         <ul className="flex items-center justify-between">
           {/* HOME */}
           <li

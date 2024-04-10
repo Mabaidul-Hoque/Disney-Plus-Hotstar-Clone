@@ -8,20 +8,42 @@ import {
   faTv,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const { pathname } = useLocation();
   const [activeIndx, setActiveIndx] = useState(1);
+  const [showBackdrop, setShowbackdrop] = useState(false);
+
+  useEffect(() => {
+    const checkScroll = () => {
+      if (window.scrollY >= 100) {
+        setShowbackdrop(true);
+      } else {
+        setShowbackdrop(false);
+      }
+    };
+
+    window.addEventListener("scroll", checkScroll);
+
+    // Cleanup function to remove the event listener
+    return () => {
+      window.removeEventListener("scroll", checkScroll);
+    };
+  }, []);
 
   const handleSearch = () => {
     console.log("Searching for:", searchTerm);
   };
   return (
     <>
-      <nav className="w-full hidden md:flex items-center justify-between h-16 px-2 sm:px-20 md:px-4 lg:px-20 xl:px-24 py-4 fixed top-0 bg-transparent">
+      <nav
+        className={`w-full hidden md:flex items-center justify-between h-16 px-2 sm:px-20 md:px-4 lg:px-20 xl:px-24 py-4 fixed top-0 ${
+          showBackdrop && "backdrop-filter backdrop-blur-md"
+        } transition-transform duration-500 ease-in-out`}
+      >
         {/* LEFT DISNEY LOGO */}
         <img
           width={50}
@@ -103,7 +125,7 @@ const Navbar = () => {
       </nav>
 
       {/* MOBILE RESPONSIVE BOTTOM NAVABR */}
-      <nav className="md:hidden  h-16 bg-black px-2 sm:px-20 md:px-4 lg:px-20 xl:px-24 py-4 fixed bottom-0 w-full">
+      <nav className="md:hidden  h-16  px-2 sm:px-20 md:px-4 lg:px-20 xl:px-24 py-4 fixed bottom-0 w-full backdrop-filter backdrop-blur-md">
         <ul className="flex items-center justify-between">
           {/* HOME */}
           <li

@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { fetchMovieGenres } from "../apis/genreApi";
 import { TopTrendingShows } from "../components/ui";
-import { trendingMovies } from "../data/homeMovieDetails";
+import { trendingMovies } from "../data/showDetails";
 import { MovieList } from "../components/movies";
 import { useMovieData } from "../contexts/MovieProvider";
 

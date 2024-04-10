@@ -1,11 +1,8 @@
-// import React from 'react'
-
 import { useEffect } from "react";
 import { TopTrendingShows } from "../components/ui";
 import { useMovieData } from "../contexts/MovieProvider";
-import { trendingMovies } from "../data/homeMovieDetails";
+import { trendingTVSeries } from "../data/showDetails";
 import { fetchTVGenres } from "../apis/genreApi";
-import { MovieList } from "../components/movies";
 import { TVLists } from "../components/tv-series";
 
 const TV = () => {
@@ -26,7 +23,7 @@ const TV = () => {
   return (
     <div>
       {/* MOVIE HEADER */}
-      <TopTrendingShows shows={trendingMovies} />
+      <TopTrendingShows shows={trendingTVSeries} />
 
       {/* DISPLAY TV SERIES BY GENRE */}
       <div>

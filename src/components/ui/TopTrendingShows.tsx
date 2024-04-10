@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { Tooltip } from "antd";
-import { TrendingShows } from "../../data/homeMovieDetails";
+import { TrendingShows } from "../../data/showDetails";
 
 interface TopTrendingShowsProps {
   shows: TrendingShows[];
@@ -57,7 +57,7 @@ const TopTrendingShows: React.FC<TopTrendingShowsProps> = ({ shows }) => {
               <p>{movie.certificate}</p>
             </div>
             {/* PLOT */}
-            <p className="text-sm">{movie.plot}</p>
+            <p className="text-md">{movie.plot}</p>
             {/* GENRE */}
             <ul className="list-none flex items-center gap-4">
               {movie.genre.length > 0 &&
@@ -70,11 +70,11 @@ const TopTrendingShows: React.FC<TopTrendingShowsProps> = ({ shows }) => {
               activeIndx === index ? "block" : "hidden"
             } absolute bottom-20 left-4 lg:left-16 xl:left-20 flex items-center gap-4 md:gap-6`}
           >
-            <button className="bg-gray-200 text-white text-xl md:text-2xl px-2 md:px-6 xl:px-16 py-2 md:py-3 rounded-md bg-opacity-40 scale-105 transition duration-300 ease-in-out">
+            <button className="bg-gray-200 text-white text-xl md:text-2xl px-2 md:px-6 xl:px-16 py-2 md:py-3 rounded-md bg-opacity-40 hover:scale-105 transition duration-300 ease-in-out backdrop-filter backdrop-blur-md">
               Subscribe to Watch
             </button>
             <Tooltip title="WatchList" color="blue">
-              <button className="bg-gray-200 text-white text-xl md:text-2xl px-6 py-2 md:py-3 rounded-md bg-opacity-40 hover:scale-105 transition duration-300 ease-in-out">
+              <button className="bg-gray-200 text-white text-xl md:text-2xl px-6 py-2 md:py-3 rounded-md bg-opacity-40 hover:scale-105 transition duration-300 ease-in-out backdrop-filter backdrop-blur-md">
                 <FontAwesomeIcon icon={faPlus} />
               </button>
             </Tooltip>
@@ -83,7 +83,7 @@ const TopTrendingShows: React.FC<TopTrendingShowsProps> = ({ shows }) => {
       ))}
 
       {/* MOVIE LIST NAVIGATION */}
-      <div className="flex items-center justify-center gap-1 md:gap-4 absolute bottom-40 lg:bottom-20 xl:right-20 lg:right-8 right-2 pl-2">
+      <div className="flex items-center justify-center gap-1 md:gap-4 absolute bottom-40 lg:bottom-20 xl:right-20 lg:right-8 right-4 pl-2">
         {shows.map((movie, index) => (
           <li
             key={movie.id}

@@ -1,6 +1,6 @@
 // import React from 'react'
 import { useEffect } from "react";
-import { trendingShows } from "../data/homeMovieDetails";
+import { trendingShows } from "../data/showDetails";
 
 import { fetchMovies } from "../apis/movieApi";
 import { useMovieData } from "../contexts/MovieProvider";

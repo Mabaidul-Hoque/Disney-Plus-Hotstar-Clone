@@ -11,6 +11,7 @@ interface ShowCardProps {
   index: number;
 }
 
+export const imgBaseUrl = "https://image.tmdb.org/t/p/original";
 const ShowCard: React.FC<ShowCardProps> = ({
   setMoviePoster,
   movie,
@@ -27,9 +28,7 @@ const ShowCard: React.FC<ShowCardProps> = ({
         className="flex-shrink-0 cursor-pointer "
         onMouseEnter={() => {
           setActiveID(movie.id);
-          setMoviePoster(
-            `https://image.tmdb.org/t/p/original/${movie.poster_path}`
-          );
+          setMoviePoster(`${imgBaseUrl}/${movie.poster_path}`);
           setShowContent(true);
         }}
         onMouseLeave={() => setShowContent(false)}
@@ -48,8 +47,8 @@ const ShowCard: React.FC<ShowCardProps> = ({
             <img
               src={
                 movie.poster_path
-                  ? `https://image.tmdb.org/t/p/original/${movie.poster_path}`
-                  : `https://image.tmdb.org/t/p/original/${movie.backdrop_path}`
+                  ? `${imgBaseUrl}/${movie.poster_path}`
+                  : `${imgBaseUrl}/${movie.backdrop_path}`
               }
               alt={movie.title || movie.name}
               className="w-full h-32 object-cover object-top rounded-t-lg "
@@ -101,8 +100,8 @@ const ShowCard: React.FC<ShowCardProps> = ({
             onClick={() => navigate(`${pathname}/show-details/${movie.id}`)}
             src={
               movie.poster_path
-                ? `https://image.tmdb.org/t/p/original/${movie.poster_path}`
-                : `https://image.tmdb.org/t/p/original/${movie.backdrop_path}`
+                ? `${imgBaseUrl}/${movie.poster_path}`
+                : `${imgBaseUrl}/${movie.backdrop_path}`
             }
             alt={movie.title || movie.name}
             className="w-48 xl:w-[12.8rem] h-72 rounded-lg z-50 bg-black hover:scale-105 hover:border hover:border-white transition-transform duration-300 ease-in-out"

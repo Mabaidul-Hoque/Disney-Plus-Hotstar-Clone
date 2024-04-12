@@ -44,7 +44,7 @@ const router = createBrowserRouter([
         element: <MovieShowListByCat />,
       },
       {
-        path: "/movie/show-details/:showID",
+        path: "/movie/show-details/:movieID",
         element: <MovieShowDetails />,
       },
       {
@@ -56,7 +56,7 @@ const router = createBrowserRouter([
         element: <TVShowListByCat />,
       },
       {
-        path: "/tv/show-details/:showID",
+        path: "/tv/show-details/:tvID",
         element: <TVShowDetails />,
       },
       {

@@ -23,3 +23,16 @@ export async function fetchTVSeriesByGenre(genreId: string, page: number) {
     console.log("Error:", error);
   }
 }
+
+export async function fetchTVShowByTvID(tvId: string) {
+  const baseUrl = "https://api.themoviedb.org/3//tv";
+  const apiKey = "86295645360abb8d1078666e62bfdf66";
+  const url = `${baseUrl}/${tvId}?api_key=${apiKey}`;
+
+  try {
+    const res = await fetch(url);
+    return await res.json();
+  } catch (error) {
+    console.log("Error:", error);
+  }
+}

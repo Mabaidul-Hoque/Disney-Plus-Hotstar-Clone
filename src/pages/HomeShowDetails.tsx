@@ -1,7 +1,34 @@
 // import React from 'react'
 
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { TVShow } from "./TVShowDetails";
+import { ShowDetails } from "../components/ui";
+import { fetchMovieByMovieID } from "../apis/movieApi";
+import { fetchTVShowByTvID } from "../apis/tvApi";
+
 const HomeShowDetails = () => {
-  return <div className="mt-64">HomeShowDetails page</div>;
+  const { showID } = useParams();
+  const [show, setShow] = useState<TVShow>();
+
+  useEffect(() => {
+    getMovieByMovieID();
+  }, []);
+
+  const getMovieByMovieID = async () => {
+    if (!showID) {
+      console.error("showID is undefined");
+      return;
+    }
+    const res = await fetchMovieByMovieID(showID);
+    const restv = await fetchTVShowByTvID(showID);
+
+    console.log("res from movieByMovieId", res);
+    console.log("restv from movieByMovieId", restv);
+    setShow(res);
+  };
+
+  return <div>{show && <ShowDetails show={show} />}</div>;
 };
 
 export default HomeShowDetails;

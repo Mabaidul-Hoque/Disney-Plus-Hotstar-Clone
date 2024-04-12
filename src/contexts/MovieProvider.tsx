@@ -39,6 +39,8 @@ interface MovieContextType {
   setDisplayLists: React.Dispatch<React.SetStateAction<Lists>>;
   genres: Genres;
   setGenres: React.Dispatch<React.SetStateAction<Genres>>;
+  searchResults: Movies[];
+  setSearchResults: React.Dispatch<React.SetStateAction<Movies[]>>;
 }
 
 const MovieContext = createContext<MovieContextType>({
@@ -58,6 +60,8 @@ const MovieContext = createContext<MovieContextType>({
     tvGenres: [],
   },
   setGenres: () => {},
+  searchResults: [],
+  setSearchResults: () => {},
 });
 
 export const useMovieData = () => {
@@ -88,12 +92,15 @@ const MovieProvider: React.FC<MovieProviderProps> = ({ children }) => {
     movieGenres: [],
     tvGenres: [],
   });
+  const [searchResults, setSearchResults] = useState<Movies[]>([]);
 
   const movieData = {
     displayLists,
     setDisplayLists,
     genres,
     setGenres,
+    searchResults,
+    setSearchResults,
   };
   return (
     <MovieContext.Provider value={movieData}>{children}</MovieContext.Provider>

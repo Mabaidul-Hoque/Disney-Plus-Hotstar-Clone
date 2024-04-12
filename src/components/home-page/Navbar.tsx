@@ -9,13 +9,17 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { fetchShowsBySearch } from "../../apis/searchApis";
+import { useMovieData } from "../../contexts/MovieProvider";
 
 const Navbar = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const { pathname } = useLocation();
   const [activeIndx, setActiveIndx] = useState(1);
   const [showBackdrop, setShowbackdrop] = useState(false);
+  const { setSearchResults } = useMovieData();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const checkScroll = () => {
@@ -34,8 +38,12 @@ const Navbar = () => {
     };
   }, []);
 
-  const handleSearch = () => {
+  const handleSearch = async () => {
     console.log("Searching for:", searchTerm);
+    const res = await fetchShowsBySearch(searchTerm);
+    console.log("res for search", res);
+    setSearchResults(res.results);
+    navigate("/search");
   };
   return (
     <>

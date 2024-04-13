@@ -17,6 +17,8 @@ import {
 import MovieProvider from "./contexts/MovieProvider.tsx";
 import TVShowDetails from "./pages/TVShowDetails.tsx";
 import MovieShowDetails from "./pages/MovieShowDetails.tsx";
+import Login from "./pages/Login.tsx";
+import SignUp from "./pages/Signup.tsx";
 
 const router = createBrowserRouter([
   {
@@ -66,6 +68,14 @@ const router = createBrowserRouter([
       {
         path: "/search",
         element: <Search />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/signup",
+        element: <SignUp />,
       },
     ],
   },

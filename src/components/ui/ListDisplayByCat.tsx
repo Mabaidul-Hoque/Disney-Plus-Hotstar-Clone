@@ -11,7 +11,7 @@ const ShowList: React.FC<ShowListProps> = ({ catTitle, movies }) => {
 
   return (
     <div
-      className="px-2 sm:px-20 md:px-4 lg:px-20 xl:px-24"
+      className="px-10 sm:px-20 md:px-4 lg:px-20 xl:px-24"
       style={{
         backgroundImage: `url(${moviePoster})`,
         backgroundRepeat: "no-repeat",

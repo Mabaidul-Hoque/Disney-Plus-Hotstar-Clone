@@ -14,11 +14,10 @@ import { fetchShowsBySearch } from "../../apis/searchApis";
 import { useMovieData } from "../../contexts/MovieProvider";
 
 const Navbar = () => {
-  const [searchTerm, setSearchTerm] = useState("");
   const { pathname } = useLocation();
   const [activeIndx, setActiveIndx] = useState(1);
   const [showBackdrop, setShowbackdrop] = useState(false);
-  const { setSearchResults } = useMovieData();
+  const { setSearchResults, searchTerm, setSearchTerm } = useMovieData();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -50,7 +49,7 @@ const Navbar = () => {
       <nav
         className={`w-full hidden md:flex items-center justify-between h-16 px-2 sm:px-20 md:px-4 lg:px-20 xl:px-24 py-4 fixed top-0 ${
           showBackdrop && "backdrop-filter backdrop-blur-md"
-        } transition-transform duration-500 ease-in-out`}
+        } transition-transform duration-500 ease-in-out bg-black bg-opacity-10`}
       >
         {/* LEFT DISNEY LOGO */}
         <img

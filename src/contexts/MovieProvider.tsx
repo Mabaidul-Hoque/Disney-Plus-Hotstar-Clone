@@ -41,6 +41,8 @@ interface MovieContextType {
   setGenres: React.Dispatch<React.SetStateAction<Genres>>;
   searchResults: Movies[];
   setSearchResults: React.Dispatch<React.SetStateAction<Movies[]>>;
+  searchTerm: string;
+  setSearchTerm: (value: string) => void;
 }
 
 const MovieContext = createContext<MovieContextType>({
@@ -62,6 +64,8 @@ const MovieContext = createContext<MovieContextType>({
   setGenres: () => {},
   searchResults: [],
   setSearchResults: () => {},
+  searchTerm: "",
+  setSearchTerm: () => {},
 });
 
 export const useMovieData = () => {
@@ -93,6 +97,7 @@ const MovieProvider: React.FC<MovieProviderProps> = ({ children }) => {
     tvGenres: [],
   });
   const [searchResults, setSearchResults] = useState<Movies[]>([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const movieData = {
     displayLists,
@@ -101,6 +106,8 @@ const MovieProvider: React.FC<MovieProviderProps> = ({ children }) => {
     setGenres,
     searchResults,
     setSearchResults,
+    searchTerm,
+    setSearchTerm,
   };
   return (
     <MovieContext.Provider value={movieData}>{children}</MovieContext.Provider>

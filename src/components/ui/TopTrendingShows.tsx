@@ -17,7 +17,7 @@ const TopTrendingShows: React.FC<TopTrendingShowsProps> = ({ shows }) => {
           key={movie.id}
           className={`${
             activeIndx === index ? "block" : "hidden"
-          } h-screen  w-full`}
+          } h-screen  w-full `}
         >
           {/* MOVIE POSTER */}
           <img
@@ -29,9 +29,9 @@ const TopTrendingShows: React.FC<TopTrendingShowsProps> = ({ shows }) => {
           />
           {/* MOVIE DETAILS */}
           <div
-            className={`max-w-96 ${
+            className={`w-full h-screen ${
               activeIndx === index ? "block" : "hidden"
-            } absolute top-10 md:top-32 left-4 sm:left-20 flex flex-col gap-4`}
+            } absolute top-0  left-0 pt-10 md:pt-24 lg:pt-32 px-4 sm:px-20 md:pl-20 lg:pl-20 md:pr-80 lg:pr-[60%] flex flex-col gap-4 bg-black bg-opacity-35`}
           >
             {/* TITLE */}
             <h1

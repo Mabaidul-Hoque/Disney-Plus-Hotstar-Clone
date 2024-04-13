@@ -23,9 +23,13 @@ const HomeShowDetails = () => {
     const res = await fetchMovieByMovieID(showID);
     const restv = await fetchTVShowByTvID(showID);
 
-    console.log("res from movieByMovieId", res);
-    console.log("restv from movieByMovieId", restv);
-    setShow(res);
+    // console.log("res from movieByMovieId", res);
+    // console.log("restv from movieByMovieId", restv);
+    if (res) {
+      setShow(res);
+    } else if (restv) {
+      setShow(restv);
+    }
   };
 
   return <div>{show && <ShowDetails show={show} />}</div>;
